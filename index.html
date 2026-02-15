@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Hey love ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Hey love ❤️</title>
 
 <style>
-
+/* Main Font Setup */
 body{
   margin:0;
   overflow:hidden;
-  font-family:'Poppins',sans-serif;
+  font-family: "Monotype Corsiva", cursive, "Dancing Script", sans-serif;
+  font-size:14px;
   background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
   display:flex;
   justify-content:center;
@@ -22,6 +21,7 @@ body{
   color:#333;
 }
 
+/* Container Box */
 .container{
   background:white;
   padding:40px;
@@ -33,11 +33,13 @@ body{
   transition:0.5s ease;
 }
 
+/* Headings */
 h1{
-  font-family:'Dancing Script',cursive;
+  font-family:"Monotype Corsiva", cursive, "Dancing Script", sans-serif;
   font-size:32px;
 }
 
+/* Buttons */
 button{
   padding:12px 25px;
   border:none;
@@ -46,57 +48,36 @@ button{
   cursor:pointer;
   margin:10px;
   transition:0.3s ease;
+  font-family:"Monotype Corsiva", cursive, "Dancing Script", sans-serif;
 }
 
-#yesBtn{
-  background:#ff4e91;
-  color:white;
-}
+#yesBtn{background:#ff4e91;color:white;}
+#noBtn{background:#ccc;}
+button:hover{transform:scale(1.1);}
 
-#noBtn{
-  background:#ccc;
-}
-
-button:hover{
-  transform:scale(1.1);
-}
-
+/* Floating hearts */
 .heart{
   position:fixed;
   color:#ff4e91;
   animation:float 4s linear infinite;
   pointer-events:none;
 }
+@keyframes float{from{transform:translateY(100vh);opacity:1;}to{transform:translateY(-10vh);opacity:0;}}
 
-@keyframes float{
-  from{ transform:translateY(100vh); opacity:1;}
-  to{ transform:translateY(-10vh); opacity:0;}
-}
-
+/* Confetti */
 .confetti{
   position:fixed;
-  width:8px;
-  height:8px;
+  width:8px;height:8px;
   pointer-events:none;
   animation:fall 3s linear forwards;
 }
+@keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0;}}
 
-@keyframes fall{
-  to{ transform:translateY(100vh) rotate(720deg); opacity:0;}
-}
+/* Dance Emoji Wiggle */
+#dance{font-size:50px;animation:wiggle 0.8s infinite;}
+@keyframes wiggle{0%,100%{transform:rotate(0deg);}25%{transform:rotate(15deg);}50%{transform:rotate(-15deg);}75%{transform:rotate(15deg);}}
 
-#dance{
-  font-size:50px;
-  animation:wiggle 0.8s infinite;
-}
-
-@keyframes wiggle{
-  0%,100%{transform:rotate(0deg);}
-  25%{transform:rotate(15deg);}
-  50%{transform:rotate(-15deg);}
-  75%{transform:rotate(15deg);}
-}
-
+/* Mood bubbles */
 .bubble{
   background:#fff0f5;
   color:#ff4e91;
@@ -105,30 +86,22 @@ button:hover{
   margin:5px;
   display:inline-block;
   font-weight:bold;
+  font-family:"Monotype Corsiva", cursive, "Dancing Script", sans-serif;
   animation:pop 0.3s ease;
 }
-
-@keyframes pop{
-  from{transform:scale(0);}
-  to{transform:scale(1);}
-}
-
+@keyframes pop{from{transform:scale(0);}to{transform:scale(1);}}
 </style>
 </head>
 <body>
 
 <div class="container" id="mainBox">
-
 <p>Hey love🥰, wanna chill together for the evening🌸?…</p>
-
 <button id="yesBtn">Yes, come over 🥰</button>
 <button id="noBtn">Not today 🤧</button>
-
 </div>
 
 <script>
-
-// Floating hearts background
+// Floating hearts
 setInterval(()=>{
   const heart=document.createElement("div");
   heart.classList.add("heart");
@@ -139,9 +112,10 @@ setInterval(()=>{
   setTimeout(()=>heart.remove(),4000);
 },500);
 
-let yesBtn=document.getElementById("yesBtn");
-let noBtn=document.getElementById("noBtn");
-let box=document.getElementById("mainBox");
+// Buttons
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const box=document.getElementById("mainBox");
 
 let yesSize=1;
 
@@ -154,8 +128,8 @@ noBtn.addEventListener("mouseover", ()=>{
   yesBtn.style.transform="scale("+yesSize+")";
 
   noBtn.style.position="absolute";
-  noBtn.style.left=Math.random()*70+"%";
-  noBtn.style.top=Math.random()*70+"%";
+  noBtn.style.left=Math.min(Math.random()*70, 60)+"%";
+  noBtn.style.top=Math.min(Math.random()*70, 60)+"%";
 });
 
 // Celebration
@@ -165,11 +139,14 @@ function celebrate(){
   <p>On my wayyy 😘🏃‍♀️</p>
   <div id="dance">💃</div>
   <br><br>
-  <button onclick="showHype()">Secret Mood Boost 🌸</button>
+  <button id="hypeBtn">Secret Mood Boost 🌸</button>
   <br><br>
   <button onclick="location.reload()">Replay 😌</button>
   `;
 
+  document.getElementById("hypeBtn").addEventListener("click", showHype);
+
+  // Confetti
   for(let i=0;i<120;i++){
     let conf=document.createElement("div");
     conf.classList.add("confetti");
@@ -181,27 +158,27 @@ function celebrate(){
   }
 }
 
-// Hype Meter
+// Mood Boost
 const compliments=[
-"You are insanely handsome😍",
-"I love how your presence feels familiar, not overwhelming🥰",
-"You show affection in subtle ways most people would miss🌸",
-"Everything about you is so special and rare✨",
-"I love you so much❤️"
+  "You are insanely handsome😍",
+  "I love how your presence feels familiar, not overwhelming🥰",
+  "You show affection in subtle ways most people would miss🌸",
+  "Everything about you is so special and rare✨",
+  "I love you so much❤️"
 ];
 
 function showHype(){
   box.innerHTML=`
-  <h1>Click for a mood boost 🌸</h1>
-  <button onclick="boost()">🌸</button>
-  <div id="bubbleArea"></div>
-  <br><br>
-  <div onclick="showRx()" style="cursor:pointer;font-size:40px;">💊</div>
+    <h1>Click for a mood boost 🌸</h1>
+    <button onclick="boost()">🌸</button>
+    <div id="bubbleArea"></div>
+    <br><br>
+    <div onclick="showRx()" style="cursor:pointer;font-size:40px;">💊</div>
   `;
 }
 
 function boost(){
-  let bubble=document.createElement("div");
+  const bubble=document.createElement("div");
   bubble.classList.add("bubble");
   bubble.innerText=compliments[Math.floor(Math.random()*compliments.length)];
   document.getElementById("bubbleArea").appendChild(bubble);
@@ -210,20 +187,19 @@ function boost(){
 // Prescription
 function showRx(){
   box.innerHTML=`
-  <h1>Prescription for Serotonin 💊</h1>
-  <p><strong>Dosage:</strong> 1–2 hours of low-key chilling</p>
-  <p><strong>Active Ingredients:</strong><br>
-  50% quality time<br>
-  15% laughter<br>
-  15% cuddles<br>
-  10% massages<br>
-  5% quiet company</p>
-  <p><strong>Side Effects:</strong> A very happy Victoria 😘</p>
-  <br>
-  <button onclick="location.reload()">Retry Decision 😌</button>
+    <h1>Prescription for Serotonin 💊</h1>
+    <p><strong>Dosage:</strong> 1–2 hours of low-key chilling</p>
+    <p><strong>Active Ingredients:</strong><br>
+    50% quality time<br>
+    15% laughter<br>
+    15% cuddles<br>
+    10% massages<br>
+    5% quiet company</p>
+    <p><strong>Side Effects:</strong> A very happy Victoria 😘</p>
+    <br>
+    <button onclick="location.reload()">Retry Decision 😌</button>
   `;
 }
-
 </script>
 
 </body>
