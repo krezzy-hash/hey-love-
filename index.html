@@ -11,7 +11,7 @@ body{
   margin:0;
   overflow:hidden;
   font-family: "Monotype Corsiva", cursive, "Dancing Script", sans-serif;
-  font-size:14px;
+  font-size:15px;
   background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
   display:flex;
   justify-content:center;
@@ -23,14 +23,15 @@ body{
 
 /* Container Box */
 .container{
-  background:white;
+  background: radial-gradient(circle at center, rgba(255, 182, 193, 0.6) 0%, rgba(255,182,193,0.3) 60%, rgba(255,182,193,0.0) 100%);
   padding:40px;
   border-radius:25px;
-  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 0 60px rgba(255, 105, 180, 0.4), 0 15px 40px rgba(0,0,0,0.2);
   width:90%;
   max-width:500px;
   position:relative;
   transition:0.5s ease;
+  backdrop-filter: blur(10px);
 }
 
 /* Headings */
@@ -136,8 +137,8 @@ noBtn.addEventListener("mouseover", ()=>{
 function celebrate(){
   box.innerHTML=`
   <h1>Yipee 🥳🥳🥳🤸‍♀️</h1>
-  <p>On my wayyy 😘🏃‍♀️</p>
-  <div id="dance">💃</div>
+  <p>On my wayyy 😘🤸‍♀️</p>
+  <div id="dance"></div>
   <br><br>
   <button id="hypeBtn">Secret Mood Boost 🌸</button>
   <br><br>
@@ -184,22 +185,6 @@ function boost(){
   document.getElementById("bubbleArea").appendChild(bubble);
 }
 
-// Prescription
-function showRx(){
-  box.innerHTML=`
-    <h1>Prescription for Serotonin 💊</h1>
-    <p><strong>Dosage:</strong> 1–2 hours of low-key chilling</p>
-    <p><strong>Active Ingredients:</strong><br>
-    50% quality time<br>
-    15% laughter<br>
-    15% cuddles<br>
-    10% massages<br>
-    5% quiet company</p>
-    <p><strong>Side Effects:</strong> A very happy Victoria 😘</p>
-    <br>
-    <button onclick="location.reload()">Retry Decision 😌</button>
-  `;
-}
 </script>
 
 </body>
