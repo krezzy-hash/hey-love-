@@ -11,7 +11,7 @@ body{
   margin:0;
   overflow:hidden;
   font-family: "Monotype Corsiva", cursive, "Dancing Script", sans-serif;
-  font-size:15px;
+  font-size: 17 px;
   background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
   display:flex;
   justify-content:center;
@@ -138,11 +138,7 @@ function celebrate(){
   box.innerHTML=`
   <h1>Yipee 🥳🥳🥳🤸‍♀️</h1>
   <p>On my wayyy 😘🤸‍♀️</p>
-  <div id="dance"></div>
   <br><br>
-  <button id="hypeBtn">Secret Mood Boost 🌸</button>
-  <br><br>
-  <button onclick="location.reload()">Replay 😌</button>
   `;
 
   document.getElementById("hypeBtn").addEventListener("click", showHype);
@@ -167,16 +163,6 @@ const compliments=[
   "Everything about you is so special and rare✨",
   "I love you so much❤️"
 ];
-
-function showHype(){
-  box.innerHTML=`
-    <h1>Click for a mood boost 🌸</h1>
-    <button onclick="boost()">🌸</button>
-    <div id="bubbleArea"></div>
-    <br><br>
-    <div onclick="showRx()" style="cursor:pointer;font-size:40px;">💊</div>
-  `;
-}
 
 function boost(){
   const bubble=document.createElement("div");
