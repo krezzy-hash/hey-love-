@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cozy Afternoon? 🌸</title>
+<title> Hey love ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
@@ -61,20 +61,11 @@ button:hover{
   transform:scale(1.1);
 }
 
-.fade{
-  opacity:0;
-  transform:translateY(20px);
-}
-
-.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
 .heart{
-  position:absolute;
+  position:fixed;
   color:#ff4e91;
   animation:float 4s linear infinite;
+  pointer-events:none;
 }
 
 @keyframes float{
@@ -86,7 +77,6 @@ button:hover{
   position:fixed;
   width:8px;
   height:8px;
-  background:red;
   pointer-events:none;
   animation:fall 3s linear forwards;
 }
@@ -123,15 +113,13 @@ button:hover{
   to{transform:scale(1);}
 }
 
-.hidden{ display:none; }
-
 </style>
 </head>
 <body>
 
-<div class="container show" id="mainBox">
+<div class="container" id="mainBox">
 
-<p> Hey love🥰, wanna chil together for afternoon🌸…</p>
+<p>Hey love🥰, wanna chill together for the evening🌸?…</p>
 
 <button id="yesBtn">Yes, come over 🥰</button>
 <button id="noBtn">Not today 🤧</button>
@@ -140,7 +128,7 @@ button:hover{
 
 <script>
 
-// Floating hearts
+// Floating hearts background
 setInterval(()=>{
   const heart=document.createElement("div");
   heart.classList.add("heart");
@@ -157,10 +145,8 @@ let box=document.getElementById("mainBox");
 
 let yesSize=1;
 
-// YES BUTTON GROWS
-yesBtn.addEventListener("click", ()=>{
-  celebrate();
-});
+// YES CLICK
+yesBtn.addEventListener("click", celebrate);
 
 // NO BUTTON MOVES + YES GROWS
 noBtn.addEventListener("mouseover", ()=>{
@@ -168,20 +154,20 @@ noBtn.addEventListener("mouseover", ()=>{
   yesBtn.style.transform="scale("+yesSize+")";
 
   noBtn.style.position="absolute";
-  noBtn.style.left=Math.random()*80+"%";
-  noBtn.style.top=Math.random()*80+"%";
+  noBtn.style.left=Math.random()*70+"%";
+  noBtn.style.top=Math.random()*70+"%";
 });
 
-// Celebration scene
+// Celebration
 function celebrate(){
   box.innerHTML=`
   <h1>Yipee 🥳🥳🥳🤸‍♀️</h1>
   <p>On my wayyy 😘🏃‍♀️</p>
   <div id="dance">💃</div>
   <br><br>
-  <button onclick="location.reload()">Replay 😌</button>
-  <br><br>
   <button onclick="showHype()">Secret Mood Boost 🌸</button>
+  <br><br>
+  <button onclick="location.reload()">Replay 😌</button>
   `;
 
   for(let i=0;i<120;i++){
@@ -196,23 +182,23 @@ function celebrate(){
 }
 
 // Hype Meter
+const compliments=[
+"You are insanely handsome😍",
+"I love how your presence feels familiar, not overwhelming🥰",
+"You show affection in subtle ways most people would miss🌸",
+"Everything about you is so special and rare✨",
+"I love you so much❤️"
+];
+
 function showHype(){
   box.innerHTML=`
   <h1>Click for a mood boost 🌸</h1>
   <button onclick="boost()">🌸</button>
   <div id="bubbleArea"></div>
   <br><br>
-  <div onclick="showRx()" style="cursor:pointer;font-size:40px;">🧴</div>
+  <div onclick="showRx()" style="cursor:pointer;font-size:40px;">💊</div>
   `;
 }
-
-const compliments=[
-"You are insanely handsome😍",
-"I love how your presence feels familiar, not overwhelming🥰",
-"You show affection in subtle ways most people would miss🌸",
-"Everything about you is so special and rare✨ ",
-" I love you so much❤️"
-];
 
 function boost(){
   let bubble=document.createElement("div");
@@ -221,18 +207,7 @@ function boost(){
   document.getElementById("bubbleArea").appendChild(bubble);
 }
 
-function showHypeMeter(){
-  document.getElementById('poutySection').classList.add('hidden');
-  document.getElementById('hype').classList.remove('hidden');
-  setTimeout(()=>{ document.getElementById('rxSection').classList.remove('hidden'); },500);
-}
-function hypeBoost(){
-  const bubble = document.createElement("div");
-  bubble.classList.add("bubble");
-  bubble.innerText = compliments[Math.floor(Math.random()*compliments.length)];
-  document.getElementById('bubbles').appendChild(bubble);
-  
-  // Prescription
+// Prescription
 function showRx(){
   box.innerHTML=`
   <h1>Prescription for Serotonin 💊</h1>
