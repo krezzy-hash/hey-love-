@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cozy Afternoon? 🌸</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  color:#333;
+}
+
+.container{
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
+  width:90%;
+  max-width:500px;
+  position:relative;
+  transition:0.5s ease;
+}
+
+h1{
+  font-family:'Dancing Script',cursive;
+  font-size:32px;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s ease;
+}
+
+#yesBtn{
+  background:#ff4e91;
+  color:white;
+}
+
+#noBtn{
+  background:#ccc;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+.fade{
+  opacity:0;
+  transform:translateY(20px);
+}
+
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.heart{
+  position:absolute;
+  color:#ff4e91;
+  animation:float 4s linear infinite;
+}
+
+@keyframes float{
+  from{ transform:translateY(100vh); opacity:1;}
+  to{ transform:translateY(-10vh); opacity:0;}
+}
+
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  background:red;
+  pointer-events:none;
+  animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+  to{ transform:translateY(100vh) rotate(720deg); opacity:0;}
+}
+
+#dance{
+  font-size:50px;
+  animation:wiggle 0.8s infinite;
+}
+
+@keyframes wiggle{
+  0%,100%{transform:rotate(0deg);}
+  25%{transform:rotate(15deg);}
+  50%{transform:rotate(-15deg);}
+  75%{transform:rotate(15deg);}
+}
+
+.bubble{
+  background:#fff0f5;
+  color:#ff4e91;
+  padding:8px 15px;
+  border-radius:20px;
+  margin:5px;
+  display:inline-block;
+  font-weight:bold;
+  animation:pop 0.3s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+}
+
+.hidden{ display:none; }
+
+</style>
+</head>
+<body>
+
+<div class="container show" id="mainBox">
+
+<p> Hey love🥰, wanna chil together for afternoon🌸…</p>
+
+<button id="yesBtn">Yes, come over 🥰</button>
+<button id="noBtn">Not today 🤧</button>
+
+</div>
+
+<script>
+
+// Floating hearts
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+2)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},500);
+
+let yesBtn=document.getElementById("yesBtn");
+let noBtn=document.getElementById("noBtn");
+let box=document.getElementById("mainBox");
+
+let yesSize=1;
+
+// YES BUTTON GROWS
+yesBtn.addEventListener("click", ()=>{
+  celebrate();
+});
+
+// NO BUTTON MOVES + YES GROWS
+noBtn.addEventListener("mouseover", ()=>{
+  yesSize+=0.2;
+  yesBtn.style.transform="scale("+yesSize+")";
+
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*80+"%";
+  noBtn.style.top=Math.random()*80+"%";
+});
+
+// Celebration scene
+function celebrate(){
+  box.innerHTML=`
+  <h1>Yipee 🥳🥳🥳🤸‍♀️</h1>
+  <p>On my wayyy 😘🏃‍♀️</p>
+  <div id="dance">💃</div>
+  <br><br>
+  <button onclick="location.reload()">Replay 😌</button>
+  <br><br>
+  <button onclick="showHype()">Secret Mood Boost 🌸</button>
+  `;
+
+  for(let i=0;i<120;i++){
+    let conf=document.createElement("div");
+    conf.classList.add("confetti");
+    conf.style.backgroundColor=["#ff4e91","#ffd700","#a6c1ee","#fbc2eb"][Math.floor(Math.random()*4)];
+    conf.style.left=Math.random()*100+"vw";
+    conf.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),3000);
+  }
+}
+
+// Hype Meter
+function showHype(){
+  box.innerHTML=`
+  <h1>Click for a mood boost 🌸</h1>
+  <button onclick="boost()">🌸</button>
+  <div id="bubbleArea"></div>
+  <br><br>
+  <div onclick="showRx()" style="cursor:pointer;font-size:40px;">🧴</div>
+  `;
+}
+
+const compliments=[
+"You are insanely handsome😍",
+"I love how your presence feels familiar, not overwhelming🥰",
+"You show affection in subtle ways most people would miss🌸",
+"Everything about you is so special and rare✨ ",
+" I love you so much❤️"
+];
+
+function boost(){
+  let bubble=document.createElement("div");
+  bubble.classList.add("bubble");
+  bubble.innerText=compliments[Math.floor(Math.random()*compliments.length)];
+  document.getElementById("bubbleArea").appendChild(bubble);
+}
+
+function showHypeMeter(){
+  document.getElementById('poutySection').classList.add('hidden');
+  document.getElementById('hype').classList.remove('hidden');
+  setTimeout(()=>{ document.getElementById('rxSection').classList.remove('hidden'); },500);
+}
+function hypeBoost(){
+  const bubble = document.createElement("div");
+  bubble.classList.add("bubble");
+  bubble.innerText = compliments[Math.floor(Math.random()*compliments.length)];
+  document.getElementById('bubbles').appendChild(bubble);
+  
+  // Prescription
+function showRx(){
+  box.innerHTML=`
+  <h1>Prescription for Serotonin 💊</h1>
+  <p><strong>Dosage:</strong> 1–2 hours of low-key chilling</p>
+  <p><strong>Active Ingredients:</strong><br>
+  50% quality time<br>
+  15% laughter<br>
+  15% cuddles<br>
+  10% massages<br>
+  5% quiet company</p>
+  <p><strong>Side Effects:</strong> A very happy Victoria 😘</p>
+  <br>
+  <button onclick="location.reload()">Retry Decision 😌</button>
+  `;
+}
+
+</script>
+
+</body>
+</html>
